@@ -2,8 +2,8 @@ package tlog
 
 import (
 	"fmt"
+	"github.com/HappyTeemo7569/teemoKit/utils"
 	"os"
-	"teemokit/utils"
 )
 
 //添加了个单例类，可以直接用

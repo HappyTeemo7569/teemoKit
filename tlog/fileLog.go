@@ -2,12 +2,12 @@ package tlog
 
 import (
 	"errors"
+	"github.com/HappyTeemo7569/teemoKit/utils"
 	"os"
 	"path"
 	"reflect"
 	"strings"
 	"sync"
-	"teemokit/utils"
 	"time"
 )
 
