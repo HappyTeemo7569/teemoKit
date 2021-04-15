@@ -235,6 +235,58 @@ func loggerMessageFormat(format string, loggerMsg *loggerMessage) string {
 	return message
 }
 
-func (logger *Logger) Info(msg string) {
-	logger.Writer(LOGGER_LEVEL_INFO, msg)
+func formatLog(f interface{}, v ...interface{}) string {
+	var msg string
+	switch f.(type) {
+	case string:
+		msg = f.(string)
+		if len(v) == 0 {
+			return msg
+		}
+		if strings.Contains(msg, "%") && !strings.Contains(msg, "%%") {
+			//format string
+		} else {
+			//do not contain format char
+			msg += strings.Repeat(" %v", len(v))
+		}
+	default:
+		msg = fmt.Sprint(f)
+		if len(v) == 0 {
+			return msg
+		}
+		msg += strings.Repeat(" %v", len(v))
+	}
+	return fmt.Sprintf(msg, v...)
+}
+
+func (logger *Logger) emergency(f interface{}, v ...interface{}) {
+	logger.Writer(LOGGER_LEVEL_EMERGENCY, formatLog(f, v...))
+}
+
+func (logger *Logger) alert(f interface{}, v ...interface{}) {
+	logger.Writer(LOGGER_LEVEL_ALERT, formatLog(f, v...))
+}
+
+func (logger *Logger) critical(f interface{}, v ...interface{}) {
+	logger.Writer(LOGGER_LEVEL_CRITICAL, formatLog(f, v...))
+}
+
+func (logger *Logger) error(f interface{}, v ...interface{}) {
+	logger.Writer(LOGGER_LEVEL_ERROR, formatLog(f, v...))
+}
+
+func (logger *Logger) warning(f interface{}, v ...interface{}) {
+	logger.Writer(LOGGER_LEVEL_WARNING, formatLog(f, v...))
+}
+
+func (logger *Logger) notice(f interface{}, v ...interface{}) {
+	logger.Writer(LOGGER_LEVEL_NOTICE, formatLog(f, v...))
+}
+
+func (logger *Logger) info(f interface{}, v ...interface{}) {
+	logger.Writer(LOGGER_LEVEL_INFO, formatLog(f, v...))
+}
+
+func (logger *Logger) debug(f interface{}, v ...interface{}) {
+	logger.Writer(LOGGER_LEVEL_DEBUG, formatLog(f, v...))
 }

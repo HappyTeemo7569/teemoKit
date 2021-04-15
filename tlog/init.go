@@ -6,7 +6,17 @@ import (
 	"teemokit/utils"
 )
 
+//添加了个单例类，可以直接用
+var TLog *Logger
+
+func init() {
+	TLog = GetLogger()
+}
+
 func GetLogger() *Logger {
+	if TLog != nil {
+		return TLog
+	}
 	Logger := NewLogger()
 
 	var err error
@@ -44,9 +54,14 @@ func GetLogger() *Logger {
 		Filename: logPath + "/test.log", // 日志输出文件名，不自动存在
 		// 如果要将单独的日志分离为文件，请配置LealFrimeNem参数。
 		LevelFileName: map[int]string{
-			LOGGER_LEVEL_ERROR: logPath + "/Error.log",
-			LOGGER_LEVEL_INFO:  logPath + "/Info.log",
-			LOGGER_LEVEL_DEBUG: logPath + "/Debug.log",
+			LOGGER_LEVEL_EMERGENCY: logPath + "/Emergency.log",
+			LOGGER_LEVEL_ALERT:     logPath + "/Alert.log",
+			LOGGER_LEVEL_CRITICAL:  logPath + "/Critical.log",
+			LOGGER_LEVEL_ERROR:     logPath + "/Error.log",
+			LOGGER_LEVEL_WARNING:   logPath + "/Warning.log",
+			LOGGER_LEVEL_NOTICE:    logPath + "/Notice.log",
+			LOGGER_LEVEL_INFO:      logPath + "/Info.log",
+			LOGGER_LEVEL_DEBUG:     logPath + "/Debug.log",
 		},
 		MaxSize:    1024 * 1024 * 10,                                                            // 文件最大值（KB），默认值0不限
 		MaxLine:    100000,                                                                      // 文件最大行数，默认 0 不限制
@@ -58,4 +73,30 @@ func GetLogger() *Logger {
 	// 添加 file 为 Logger 的一个输出
 	Logger.AddOutputLogger("file", LOGGER_LEVEL_DEBUG, fileConfig)
 	return Logger
+}
+
+func Emergency(f interface{}, v ...interface{}) {
+	TLog.emergency(f, v)
+}
+
+func Alert(f interface{}, v ...interface{}) {
+	TLog.alert(f, v)
+}
+func Critical(f interface{}, v ...interface{}) {
+	TLog.critical(f, v)
+}
+func Error(f interface{}, v ...interface{}) {
+	TLog.error(f, v)
+}
+func Warning(f interface{}, v ...interface{}) {
+	TLog.warning(f, v)
+}
+func Notice(f interface{}, v ...interface{}) {
+	TLog.notice(f, v)
+}
+func Info(f interface{}, v ...interface{}) {
+	TLog.info(f, v)
+}
+func Debug(f interface{}, v ...interface{}) {
+	TLog.debug(f, v)
 }
