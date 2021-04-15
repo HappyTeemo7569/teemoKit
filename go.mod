@@ -1,4 +1,4 @@
-module teemokit
+module github.com/HappyTeemo7569/teemoKit
 
 go 1.16
 
