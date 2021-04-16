@@ -177,9 +177,9 @@ func (logger *Logger) writeToOutputs(loggerMsg *loggerMessage) {
 
 //write log message
 //params : level int, msg string
-func (logger *Logger) Writer(level int, msg string) {
+func (logger *Logger) Writer(calldepth, level int, msg string) {
 	funcName := "null"
-	pc, file, line, ok := runtime.Caller(2)
+	pc, file, line, ok := runtime.Caller(calldepth)
 	if !ok {
 		file = "null"
 		line = 0
@@ -257,36 +257,4 @@ func formatLog(f interface{}, v ...interface{}) string {
 		msg += strings.Repeat(" %v", len(v))
 	}
 	return fmt.Sprintf(msg, v...)
-}
-
-func (logger *Logger) emergency(f interface{}, v ...interface{}) {
-	logger.Writer(LOGGER_LEVEL_EMERGENCY, formatLog(f, v...))
-}
-
-func (logger *Logger) alert(f interface{}, v ...interface{}) {
-	logger.Writer(LOGGER_LEVEL_ALERT, formatLog(f, v...))
-}
-
-func (logger *Logger) critical(f interface{}, v ...interface{}) {
-	logger.Writer(LOGGER_LEVEL_CRITICAL, formatLog(f, v...))
-}
-
-func (logger *Logger) error(f interface{}, v ...interface{}) {
-	logger.Writer(LOGGER_LEVEL_ERROR, formatLog(f, v...))
-}
-
-func (logger *Logger) warning(f interface{}, v ...interface{}) {
-	logger.Writer(LOGGER_LEVEL_WARNING, formatLog(f, v...))
-}
-
-func (logger *Logger) notice(f interface{}, v ...interface{}) {
-	logger.Writer(LOGGER_LEVEL_NOTICE, formatLog(f, v...))
-}
-
-func (logger *Logger) info(f interface{}, v ...interface{}) {
-	logger.Writer(LOGGER_LEVEL_INFO, formatLog(f, v...))
-}
-
-func (logger *Logger) debug(f interface{}, v ...interface{}) {
-	logger.Writer(LOGGER_LEVEL_DEBUG, formatLog(f, v...))
 }

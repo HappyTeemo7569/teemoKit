@@ -76,27 +76,27 @@ func GetLogger() *Logger {
 }
 
 func Emergency(f interface{}, v ...interface{}) {
-	TLog.emergency(f, v)
+	TLog.Writer(2, LOGGER_LEVEL_EMERGENCY, formatLog(f, v...))
 }
 
 func Alert(f interface{}, v ...interface{}) {
-	TLog.alert(f, v)
+	TLog.Writer(2, LOGGER_LEVEL_ALERT, formatLog(f, v...))
 }
 func Critical(f interface{}, v ...interface{}) {
-	TLog.critical(f, v)
+	TLog.Writer(2, LOGGER_LEVEL_CRITICAL, formatLog(f, v...))
 }
 func Error(f interface{}, v ...interface{}) {
-	TLog.error(f, v)
+	TLog.Writer(2, LOGGER_LEVEL_ERROR, formatLog(f, v...))
 }
 func Warning(f interface{}, v ...interface{}) {
-	TLog.warning(f, v)
+	TLog.Writer(2, LOGGER_LEVEL_WARNING, formatLog(f, v...))
 }
 func Notice(f interface{}, v ...interface{}) {
-	TLog.notice(f, v)
+	TLog.Writer(2, LOGGER_LEVEL_NOTICE, formatLog(f, v...))
 }
 func Info(f interface{}, v ...interface{}) {
-	TLog.info(f, v)
+	TLog.Writer(2, LOGGER_LEVEL_INFO, formatLog(f, v...))
 }
 func Debug(f interface{}, v ...interface{}) {
-	TLog.debug(f, v)
+	TLog.Writer(2, LOGGER_LEVEL_DEBUG, formatLog(f, v...))
 }
