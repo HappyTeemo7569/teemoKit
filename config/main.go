@@ -10,6 +10,9 @@ type VAppConfig struct {
 	runMode     string
 }
 
+
+
+
 // NewConfig adapterName is ini/json/xml/yaml.
 // filename is the config file path.
 func NewAppConfig(adapterName, filename string) (*VAppConfig, error) {
