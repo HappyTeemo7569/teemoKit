@@ -1,4 +1,4 @@
-package utils
+package util
 
 import (
 	"bufio"
@@ -42,9 +42,9 @@ func (f *File) PathExists(path string) (bool, error) {
 	return false, err
 }
 
-//get file lines
-//params : filename
-//return : fileLine, error
+// get file lines
+// params : filename
+// return : fileLine, error
 func (f *File) GetFileLines(filename string) (fileLine int64, err error) {
 	file, err := os.OpenFile(filename, os.O_RDONLY, 0766)
 	if err != nil {
@@ -86,7 +86,7 @@ func FileExists(name string) bool {
 }
 
 // SearchFile Search a file in paths.
-// this is often used in search config file in /etc ~/
+// this is often used in search conf file in /etc ~/
 func SearchFile(filename string, paths ...string) (fullpath string, err error) {
 	for _, path := range paths {
 		if fullpath = filepath.Join(path, filename); FileExists(fullpath) {

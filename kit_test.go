@@ -5,6 +5,6 @@ import (
 	"testing"
 )
 
-func Test(*testing.T) {
+func Test_Main(*testing.T) {
 	tlog.Info("11")
 }

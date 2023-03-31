@@ -18,9 +18,10 @@ type Logger struct {
 	synchronous bool                //是否异步
 	wait        sync.WaitGroup      //等待
 	signalChan  chan string
+	logPath     string //记录路径
 }
 
-//日志格式
+// 日志格式
 type loggerMessage struct {
 	Timestamp         int64  `json:"timestamp"`
 	TimestampFormat   string `json:"timestamp_format"`
@@ -49,7 +50,7 @@ func NewLogger() *Logger {
 	return logger
 }
 
-//注册适配器
+// Register 注册适配器
 func Register(adapterName string, newLog adapterLoggerFunc) {
 	if adapters[adapterName] != nil {
 		panic("logger: logger adapter " + adapterName + " already registered!")
@@ -61,7 +62,7 @@ func Register(adapterName string, newLog adapterLoggerFunc) {
 	adapters[adapterName] = newLog
 }
 
-//添加输出方式
+// AddOutputLogger 添加输出方式
 func (logger *Logger) AddOutputLogger(adapterName string, level int, config Config) {
 	logger.lock.Lock()
 	defer logger.lock.Unlock()
@@ -90,7 +91,7 @@ func (logger *Logger) AddOutputLogger(adapterName string, level int, config Conf
 	logger.outputs = append(logger.outputs, output)
 }
 
-//减少输出方式
+// DelOutputLogger 减少输出方式
 func (logger *Logger) DelOutputLogger(adapterName string) {
 	logger.lock.Lock()
 	defer logger.lock.Unlock()
@@ -105,7 +106,7 @@ func (logger *Logger) DelOutputLogger(adapterName string) {
 	logger.outputs = outputs
 }
 
-//设置异步模式
+// SetAsync 设置异步模式
 func (logger *Logger) SetAsync(data ...int) {
 	logger.lock.Lock()
 	defer logger.lock.Unlock()
@@ -175,8 +176,8 @@ func (logger *Logger) writeToOutputs(loggerMsg *loggerMessage) {
 	}
 }
 
-//write log message
-//params : level int, msg string
+// Writer write log message
+// params : level int, msg string
 func (logger *Logger) Writer(calldepth, level int, msg string) {
 	funcName := "null"
 	pc, file, line, ok := runtime.Caller(calldepth)
@@ -213,13 +214,13 @@ func (logger *Logger) Writer(calldepth, level int, msg string) {
 	}
 }
 
-//输出错误
+// 输出错误
 func printError(message string) {
 	fmt.Println(message)
 	os.Exit(0)
 }
 
-//格式化输出
+// 格式化输出
 func loggerMessageFormat(format string, loggerMsg *loggerMessage) string {
 	message := strings.Replace(format, "%timestamp%", strconv.FormatInt(loggerMsg.Timestamp, 10), 1)
 	message = strings.Replace(message, "%timestamp_format%", loggerMsg.TimestampFormat, 1)

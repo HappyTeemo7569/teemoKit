@@ -1,4 +1,4 @@
-package utils
+package util
 
 import (
 	"bufio"
@@ -382,7 +382,7 @@ func (c *ConfSet) GetKeyValue(line string) (name, value string) {
 	return name, value
 }
 
-//获取环境配置
+// 获取环境配置
 func (c *ConfSet) GetEnv(config map[string]interface{}, model string) error {
 	c.parsed = true
 	currentSection := GLOBAL_SECTION

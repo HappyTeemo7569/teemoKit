@@ -1,4 +1,4 @@
-package utils
+package util
 
 import (
 	"io/ioutil"
@@ -16,13 +16,13 @@ func NewMisc() *Misc {
 	return &Misc{}
 }
 
-//格式化 unix 时间戳
+// 格式化 unix 时间戳
 func (misc *Misc) FormatUnixTime(unixTime int64) string {
 	tm := time.Unix(unixTime, 0)
 	return tm.Format("2006-01-02 15:04:05")
 }
 
-//map Intersect
+// map Intersect
 func (misc *Misc) MapIntersect(defaultMap map[string]interface{}, inputMap map[string]interface{}) map[string]interface{} {
 	for key, _ := range defaultMap {
 		inputValue, ok := inputMap[key]
@@ -34,7 +34,7 @@ func (misc *Misc) MapIntersect(defaultMap map[string]interface{}, inputMap map[s
 	return defaultMap
 }
 
-//http get request
+// http get request
 func (misc *Misc) HttpGet(queryUrl string, queryValues map[string]string, headerValues map[string]string, timeout int) (body string, code int, err error) {
 	if !strings.Contains(queryUrl, "?") {
 		queryUrl += "?"
@@ -70,7 +70,7 @@ func (misc *Misc) HttpGet(queryUrl string, queryValues map[string]string, header
 	return string(bodyByte), code, nil
 }
 
-//http post request
+// http post request
 func (misc *Misc) HttpPost(queryUrl string, queryValues map[string]string, headerValues map[string]string, timeout int) (body string, code int, err error) {
 	if !strings.Contains(queryUrl, "?") {
 		queryUrl += "?"
@@ -108,7 +108,8 @@ func (misc *Misc) HttpPost(queryUrl string, queryValues map[string]string, heade
 	return string(bodyByte), code, nil
 }
 
-/**
+/*
+*
 随机字符串
 */
 func (m *Misc) RandString(strlen int) string {

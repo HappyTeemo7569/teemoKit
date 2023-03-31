@@ -1,33 +1,27 @@
 package tlog
 
 import (
-	"fmt"
-	"net/http"
 	"testing"
 )
 
-var urls = []string{
-	"http://www.baidu.com/",
+func Test_Log(t *testing.T) {
+	Emergency("Emergency test")
+	Alert("Alert test")
+	Critical("Critical test")
+	Error("Error test")
+	Warning("Warning test")
+	Notice("Notice test")
+	Info("Info test")
+	Debug("Debug test")
 }
 
-//初始化
-func Test(*testing.T) {
-	for _, url := range urls {
-		resp, err := http.Head(url)
-		if err != nil {
-			fmt.Println("Error:", url, err)
-		}
-		fmt.Println(url, ": ", resp.Status)
-	}
+const LOGGER_LEVEL_API = 8
 
-	//for {
-	//	Emergency("Emergency")
-	//	Alert("Alert")
-	//	Critical("Critical")
-	//	Error("Error")
-	//	Warning("Warning")
-	//	Notice("Notice")
-	//	Info("Info")
-	//	Debug("Debug")
-	//}
+func Test_Custom_Log(t *testing.T) {
+
+	err := TLog.AddCustomizeLevel(LOGGER_LEVEL_API, "api")
+	if err != nil {
+		t.Log(err.Error())
+	}
+	Customize(LOGGER_LEVEL_API, "API test")
 }

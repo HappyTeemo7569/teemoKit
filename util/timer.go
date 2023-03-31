@@ -1,4 +1,4 @@
-package utils
+package util
 
 import (
 	"time"
@@ -8,8 +8,8 @@ import (
 定时器
 */
 
-//设置定时器
-//s是秒数，f是执行函数，n是次数
+// 设置定时器
+// s是秒数，f是执行函数，n是次数
 func SetMyTimer(s int, f func(), n int) chan int {
 	time1 := time.NewTicker(time.Second * time.Duration(s))
 	ch := make(chan int)

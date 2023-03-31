@@ -1,14 +1,14 @@
-package utils
+package util
 
 import (
 	"fmt"
 	"time"
 )
 
-//带毫秒的日期格式化字符串
+// 带毫秒的日期格式化字符串
 const FormatDateStringToMs = "2006-01-02 15:04:05.999999999"
 
-//正常到秒的日期格式化字符串
+// 正常到秒的日期格式化字符串
 const FormatDateString = "2006-01-02 15:04:05"
 
 func FormatDate(t time.Time) string {
