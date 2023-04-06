@@ -1,7 +1,6 @@
 package util
 
 import (
-	"github.com/HappyTeemo7569/teemoKit/convert"
 	"strconv"
 	"strings"
 )
@@ -16,5 +15,5 @@ func FloatCut(f float64, m int) float64 {
 	if len(newn) < 2 || m >= len(newn[1]) {
 		return f
 	}
-	return convert.StringToFloat64(newn[0] + "." + newn[1][:m])
+	return StringToFloat64(newn[0] + "." + newn[1][:m])
 }

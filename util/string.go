@@ -2,14 +2,13 @@ package util
 
 import (
 	"fmt"
-	"github.com/HappyTeemo7569/teemoKit/convert"
 	"strings"
 )
 
 func Explode(s string) (res []int) {
 	sli := strings.Split(s, ",")
 	for _, v := range sli {
-		res = append(res, convert.StringToInt(v))
+		res = append(res, StringToInt(v))
 	}
 	return res
 }
@@ -17,7 +16,7 @@ func Explode(s string) (res []int) {
 func ExplodeInt64(s string) (res []int64) {
 	sli := strings.Split(s, ",")
 	for _, v := range sli {
-		res = append(res, convert.StringToInt64(v))
+		res = append(res, StringToInt64(v))
 	}
 	return res
 }

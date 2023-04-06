@@ -20,18 +20,18 @@ func SetMyTimer(s int, f func(), n int) chan int {
 		for {
 			select {
 			case <-time1.C:
-				//base.Logger.Debugf("定时器响应")
+				//"定时器响应"
 				f()
 				if n > 0 {
 					cnt++
 					if cnt >= n {
-						//base.Logger.Debugf("定时器次数到了")
+						//"定时器次数到了"
 						time1.Stop()
 						return
 					}
 				}
 			case <-ch:
-				//base.Logger.Debugf("定时器提前停止")
+				//"定时器提前停止"
 				time1.Stop()
 				return
 			}

@@ -109,6 +109,31 @@ func GetDayInt(itimestmp time.Time) int {
 	return dayInt
 }
 
+var cstZone = time.FixedZone("CST", 8*3600)
+var TimeForamtString = "2006-01-02 15:04:05"
+
+// 时间戳转字符串
+func TimeConvertIntToString(timeUnix int64) string {
+	return time.Unix(timeUnix, 0).In(cstZone).Format("2006-01-02 15:04:05")
+}
+
+func TimeConvertIntToTime(timeUnix int64) time.Time {
+	str := TimeConvertIntToString(timeUnix)
+	t, _ := time.ParseInLocation("2006-01-02 15:04:05", str, time.Local)
+	return t
+}
+
+// 字符串转时间
+func TimeConvertStringToTime(formatTimeStr string) time.Time {
+	formatTime, _ := time.Parse("2006-01-02 15:04:05", formatTimeStr)
+	return formatTime
+}
+
+func TimeConvertStringToInt(formatTimeStr string) int64 {
+	formatTime, _ := time.Parse("2006-01-02 15:04:05", formatTimeStr)
+	return formatTime.Unix()
+}
+
 /*
 //1、获取当前时间
 currentTime:= time.Now() //获取当前时间，类型是Go的时间类型Time

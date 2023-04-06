@@ -1,7 +1,6 @@
 package util
 
 import (
-	"github.com/HappyTeemo7569/teemoKit/convert"
 	"math/rand"
 	"time"
 )
@@ -41,7 +40,7 @@ func ConvertArrayInt64ToInt(arr []int64) []int {
 func ArrayToStr(str []string) []int64 {
 	ar := make([]int64, 0)
 	for _, s := range str {
-		ar = append(ar, convert.StringToInt64(s))
+		ar = append(ar, StringToInt64(s))
 	}
 	return ar
 }
@@ -348,8 +347,8 @@ func ArrayMerge(ss ...[]interface{}) []interface{} {
 func ArrayStructMerge(content interface{}, content2 interface{}) map[string]interface{} {
 	var name = make(map[string]interface{})
 
-	map1 := convert.JSONToMap(content)
-	map2 := convert.JSONToMap(content2)
+	map1 := JSONToMap(content)
+	map2 := JSONToMap(content2)
 	for k, v := range map1 {
 		name[k] = v
 	}

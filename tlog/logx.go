@@ -1,6 +1,7 @@
 package tlog
 
 import (
+	"github.com/nacos-group/nacos-sdk-go/util"
 	"time"
 )
 
@@ -15,18 +16,10 @@ type ApiLog struct {
 	CreateTime time.Time `json:"create_time"`
 }
 
-//func (l *ApiLog) ToString() string {
-//	return fmt.Sprintf("&#&%s&#&%s&#&%s&#&%s&#&%s&#&%.3f&#&%s",
-//		convert.NewDate(l.Create).LongMs(),
-//		l.TraceId,
-//		l.Url,
-//		l.Header,
-//		l.Para,
-//		l.Interval,
-//		l.Context,
-//	)
-//}
+func (l *ApiLog) ToString() string {
+	return util.ToJsonString(l)
+}
 
-//func (l *ApiLog) Write() {
-//	Notice(l.ToString())
-//}
+func (l *ApiLog) Write() {
+	Notice(l.ToString())
+}
