@@ -1,7 +1,7 @@
 package tlog
 
 import (
-	"github.com/nacos-group/nacos-sdk-go/util"
+	"encoding/json"
 	"time"
 )
 
@@ -16,8 +16,14 @@ type ApiLog struct {
 	CreateTime time.Time `json:"create_time"`
 }
 
+// 通过json
+func (l *ApiLog) byJson() string {
+	b, _ := json.Marshal(l)
+	return string(b)
+}
+
 func (l *ApiLog) ToString() string {
-	return util.ToJsonString(l)
+	return l.byJson()
 }
 
 func (l *ApiLog) Write() {
